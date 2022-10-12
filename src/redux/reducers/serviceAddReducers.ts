@@ -1,15 +1,19 @@
+import { ChangeState } from "../../types/ChangeState";
+import Product from "../../types/Product";
 import {CHANGE_SERVICE_FIELD} from "../actions/actionTypes";
 
-const initialState = {
+const initialState: ChangeState = {
+  id: "",
   name: "",
-  price: ""
+  price: "",
+  changing: false
 };
 
-export default function serviceAddReducer(state: any = initialState, action: any) {
+export default function serviceAddReducer(state: ChangeState = initialState, action: any) {
   switch(action.type) {
     case CHANGE_SERVICE_FIELD:
-      const {name, value} = action.payload;
-      return {...state, [name]: value};
+      const product: Product = action.payload;
+      return {...product, changing: action.payload.changing};
     default: 
       return state;
   }
